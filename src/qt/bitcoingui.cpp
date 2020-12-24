@@ -378,12 +378,6 @@ void BitcoinGUI::createActions()
     showHelpMessageAction->setMenuRole(QAction::NoRole);
     showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible HellenicCoin command-line options").arg(PACKAGE_NAME));
 
-    openChatroomAction = new QAction(tr("&Chatroom"), this);
-    openChatroomAction->setStatusTip(tr("Open the HellenicCoin Discord in a web browser."));
-
-    openForumAction = new QAction(tr("&Forum"), this);
-    openForumAction->setStatusTip(tr("Open https://talk.helleniccoin.net in a web browser."));
-
     connect(quitAction, &QAction::triggered, qApp, QApplication::quit);
     connect(aboutAction, &QAction::triggered, this, &BitcoinGUI::aboutClicked);
     connect(aboutQtAction, &QAction::triggered, qApp, QApplication::aboutQt);
@@ -393,9 +387,6 @@ void BitcoinGUI::createActions()
     connect(openRPCConsoleAction, &QAction::triggered, this, &BitcoinGUI::showDebugWindow);
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, &QAction::triggered, rpcConsole, &QWidget::hide);
-
-    connect(openChatroomAction, SIGNAL(triggered()), this, SLOT(openChatroom()));
-    connect(openForumAction, SIGNAL(triggered()), this, SLOT(openForum()));
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -543,8 +534,6 @@ void BitcoinGUI::createMenuBar()
     }
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
-    help->addAction(openChatroomAction);
-    help->addAction(openForumAction);
     help->addAction(showHelpMessageAction);
     help->addSeparator();
     help->addAction(aboutAction);
@@ -909,14 +898,6 @@ void BitcoinGUI::gotoSignMessageTab(QString addr)
 void BitcoinGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
-}
-
-void BitcoinGUI::openChatroom() {
-    QDesktopServices::openUrl(QUrl("https://discord.gg/XPxfwtG"));
-}
-
-void BitcoinGUI::openForum() {
-    QDesktopServices::openUrl(QUrl("https://talk.helleniccoin.net"));
 }
 
 #endif // ENABLE_WALLET

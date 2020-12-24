@@ -70,7 +70,7 @@ public:
         consensus.bnInitialHashTarget = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~arith_uint256(0) >> 48;
 
         consensus.nTargetTimespan = 120 * 60;
-        consensus.nStakeTargetSpacing = 60;
+        consensus.nStakeTargetSpacing = 120;
         consensus.nTargetSpacingWorkMax = 12 * consensus.nStakeTargetSpacing; // 2-hour
         consensus.nPowTargetSpacing = consensus.nStakeTargetSpacing;
         consensus.nStakeMinAge = 2 * 60 * 60;

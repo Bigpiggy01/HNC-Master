@@ -1580,7 +1580,7 @@ void ThreadScriptCheck(int worker_num) {
 // environment. See test/functional/p2p-segwit.py.
 static bool IsScriptWitnessEnabled(const Consensus::Params& params)
 {
-    return params.SegwitHeight != std::numeric_limits<int>::max();
+    return false;
 }
 
 static unsigned int GetBlockScriptFlags(const CBlockIndex* pindex, const Consensus::Params& consensusparams) EXCLUSIVE_LOCKS_REQUIRED(cs_main) {
