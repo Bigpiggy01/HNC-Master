@@ -12,18 +12,18 @@ define(_PEERCOIN_VERSION_REVISION, 0)
 define(_PEERCOIN_VERSION_BUILD, 0)
 define(_PEERCOIN_VERSION_RC, 0)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Peercoin]])
-AC_INIT([Peercoin],m4_join([.], _PEERCOIN_VERSION_MAJOR._PEERCOIN_VERSION_MINOR._PEERCOIN_VERSION_REVISION, m4_if(_PEERCOIN_VERSION_BUILD, [0], [], _PEERCOIN_VERSION_BUILD))m4_if(_PEERCOIN_VERSION_RC, [0], [], [rc]_PEERCOIN_VERSION_RC),[https://github.com/peercoin/peercoin/issues],[peercoin],[https://peercoin.net/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Helleniccoin]])
+AC_INIT([Helleniccoin],m4_join([.], _PEERCOIN_VERSION_MAJOR._PEERCOIN_VERSION_MINOR._PEERCOIN_VERSION_REVISION, m4_if(_PEERCOIN_VERSION_BUILD, [0], [], _PEERCOIN_VERSION_BUILD))m4_if(_PEERCOIN_VERSION_RC, [0], [], [rc]_PEERCOIN_VERSION_RC),[https://github.com/peercoin/peercoin/issues],[peercoin],[https://peercoin.net/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=peercoind
-BITCOIN_GUI_NAME=peercoin-qt
-BITCOIN_CLI_NAME=peercoin-cli
-BITCOIN_TX_NAME=peercoin-tx
-BITCOIN_WALLET_TOOL_NAME=peercoin-wallet
+BITCOIN_DAEMON_NAME=helleniccoind
+BITCOIN_GUI_NAME=helleniccoin-qt
+BITCOIN_CLI_NAME=helleniccoin-cli
+BITCOIN_TX_NAME=helleniccoin-tx
+BITCOIN_WALLET_TOOL_NAME=helleniccoin-wallet
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])

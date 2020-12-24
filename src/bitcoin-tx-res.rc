@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Peercoin"
-            VALUE "FileDescription",    "peercoin-tx (CLI Peercoin transaction editor utility)"
+            VALUE "CompanyName",        "Helleniccoin"
+            VALUE "FileDescription",    "helleniccoin-tx (CLI Helleniccoin transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "peercoin-tx"
+            VALUE "InternalName",       "helleniccoin-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "peercoin-tx.exe"
-            VALUE "ProductName",        "peercoin-tx"
+            VALUE "OriginalFilename",   "helleniccoin-tx.exe"
+            VALUE "ProductName",        "helleniccoin-tx"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END
