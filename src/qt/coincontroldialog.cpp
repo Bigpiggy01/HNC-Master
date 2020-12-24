@@ -408,8 +408,7 @@ void CoinControlDialog::updateLabels(CCoinControl& m_coin_control, WalletModel *
     if (!model)
         return;
 
-    bool fNewFees = IsProtocolV07(GetAdjustedTime());
-    //CAmount nMinFeeBase = (fNewFees ? MIN_TX_FEE : MIN_TX_FEE_PREV7);
+    bool fNewFees = false;
 
     // nPayAmount
     CAmount nPayAmount = 0;

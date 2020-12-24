@@ -9,49 +9,58 @@
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
-
 #include <bignum.h>
 #include <chainparams.h>
 #include <kernel.h>
+#include <validation.h>
+
+static const int64_t nTargetTimespan = 120 * 60;
+CBigNum bnProofOfStakeLimit(uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+CBigNum bnProofOfStakeLimitV2(uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+
+static CBigNum GetProofOfStakeLimit(int nHeight)
+{
+    if (IsProtocolV2(nHeight))
+        return bnProofOfStakeLimitV2;
+    else
+        return bnProofOfStakeLimit;
+}
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake, const Consensus::Params& params)
 {
-    if (pindexLast == nullptr)
-        return UintToArith256(params.powLimit).GetCompact(); // genesis block
+    CBigNum bnTargetLimit = fProofOfStake ? GetProofOfStakeLimit(pindexLast->nHeight) : bnProofOfStakeLimit;
+
+    if (pindexLast == NULL)
+        return bnTargetLimit.GetCompact(); // genesis block
 
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
-    if (pindexPrev->pprev == nullptr)
-        return UintToArith256(params.bnInitialHashTarget).GetCompact(); // first block
+    if (pindexPrev->pprev == NULL)
+        return bnTargetLimit.GetCompact(); // first block
     const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
-    if (pindexPrevPrev->pprev == nullptr)
-        return UintToArith256(params.bnInitialHashTarget).GetCompact(); // second block
+    if (pindexPrevPrev->pprev == NULL)
+        return bnTargetLimit.GetCompact(); // second block
 
+    int64_t nTargetSpacing = 60;
     int64_t nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
+    if (IsProtocolV1RetargetingFixed(pindexLast->nHeight)) {
+        if (nActualSpacing < 0)
+            nActualSpacing = nTargetSpacing;
+    }
+    if (IsProtocolV3(pindexLast->nTime)) {
+        if (nActualSpacing > nTargetSpacing * 10)
+            nActualSpacing = nTargetSpacing * 10;
+    }
 
-    // peercoin: target change every block
-    // peercoin: retarget with exponential moving toward target spacing
+    // ppcoin: target change every block
+    // ppcoin: retarget with exponential moving toward target spacing
     CBigNum bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
-    if (Params().NetworkIDString() != CBaseChainParams::REGTEST) {
-        int64_t nTargetSpacing;
+    int64_t nInterval = nTargetTimespan / nTargetSpacing;
+    bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
+    bnNew /= ((nInterval + 1) * nTargetSpacing);
 
-        if (fProofOfStake) {
-            nTargetSpacing = params.nStakeTargetSpacing;
-        } else {
-            if (IsProtocolV09(pindexLast->nTime)) {
-                nTargetSpacing = params.nStakeTargetSpacing * 6;
-            } else {
-                nTargetSpacing = std::min(params.nTargetSpacingWorkMax, params.nStakeTargetSpacing * (1 + pindexLast->nHeight - pindexPrev->nHeight));
-            }
-        }
-
-        int64_t nInterval = params.nTargetTimespan / nTargetSpacing;
-        bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
-        bnNew /= ((nInterval + 1) * nTargetSpacing);
-        }
-
-    if (bnNew > CBigNum(params.powLimit))
-        bnNew = CBigNum(params.powLimit);
+    if (bnNew <= 0 || bnNew > bnTargetLimit)
+        bnNew = bnTargetLimit;
 
     return bnNew.GetCompact();
 }

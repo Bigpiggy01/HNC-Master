@@ -2844,8 +2844,7 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
             CTxOut change_prototype_txout(0, scriptChange);
             coin_selection_params.change_output_size = GetSerializeSize(change_prototype_txout, SER_DISK);
 
-            bool fNewFees = IsProtocolV07(txNew.nTime);
-            nFeeRet = (fNewFees ? MIN_TX_FEE : MIN_TX_FEE_PREV7);
+            nFeeRet = MIN_TX_FEE_PREV7;
             bool pick_new_inputs = true;
             CAmount nValueIn = 0;
 
@@ -4323,7 +4322,7 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
     // The following split & combine thresholds are important to security
     // Should not be adjusted if you don't understand the consequences
     static unsigned int nStakeSplitAge = (60 * 60 * 24 * 90);
-    int64_t nCombineThreshold = GetProofOfWorkReward(GetLastBlockIndex(::ChainActive().Tip(), false)->nBits) / 3;
+    int64_t nCombineThreshold = 2000 * COIN;
 
     CBigNum bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
@@ -4394,7 +4393,7 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             uint256 hashProofOfStake = uint256();
             COutPoint prevoutStake = pcoin.outpoint;
-            if (CheckStakeKernelHash(nBits, ::ChainActive().Tip(), header, postx.nTxOffset + CBlockHeader::NORMAL_SERIALIZE_SIZE, tx, prevoutStake, txNew.nTime - n, hashProofOfStake))
+            if (CheckStakeKernelHash(nBits, ::ChainActive().Tip(), header, postx.nTxOffset + CBlockHeader::NORMAL_SERIALIZE_SIZE, *tx, prevoutStake, txNew.nTime - n, hashProofOfStake))
             {
                 // Found a kernel
                 if (gArgs.GetBoolArg("-debug", false) && gArgs.GetBoolArg("-printcoinstake", false))
@@ -4497,7 +4496,7 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
         if (!GetCoinAge((const CTransaction)txNew, view, nCoinAge, true))
             return error("CreateCoinStake : failed to calculate coin age");
 
-        CAmount nReward = GetProofOfStakeReward(nCoinAge, txNew.nTime, ::ChainActive().Tip()->nMoneySupply);
+        CAmount nReward = GetProofOfStakeReward(::ChainActive().Tip()->pprev, nCoinAge, 0);
         // Refuse to create mint that has zero or negative reward
         if(nReward <= 0) {
           return false;
@@ -4506,7 +4505,7 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
     }
 
     CAmount nMinFee = 0;
-    CAmount nMinFeeBase = (IsProtocolV07(txNew.nTime) ? MIN_TX_FEE : MIN_TX_FEE_PREV7);
+    CAmount nMinFeeBase = MIN_TX_FEE_PREV7;
     while(true)
     {
         // Set output amount

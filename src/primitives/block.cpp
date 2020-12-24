@@ -13,9 +13,13 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    uint256 thash;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
-    return thash;
+    if (nVersion > 6) {
+        return Hash(BEGIN(nVersion), END(nNonce));
+    } else {
+        uint256 thash;
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        return thash;
+    }
 }
 
 std::string CBlock::ToString() const

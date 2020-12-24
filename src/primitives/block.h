@@ -32,7 +32,7 @@ public:
     int32_t nFlags;
     // peercoin: Used in CheckProofOfStake().
     static const int32_t NORMAL_SERIALIZE_SIZE=80;
-    static const int32_t CURRENT_VERSION=3;
+    static const int32_t CURRENT_VERSION=7;
 
     CBlockHeader()
     {
@@ -158,7 +158,12 @@ public:
         return maxTransactionTime;
     }
 
-    unsigned int GetStakeEntropyBit() const; // peercoin: entropy bit for stake modifier if chosen by modifier
+    unsigned int GetStakeEntropyBit() const
+    {
+        // Take last bit of block hash as entropy bit
+        unsigned int nEntropyBit = ((GetHash().GetLow64()) & 1llu);
+        return nEntropyBit;
+    }
 
     std::string ToString() const;
 };

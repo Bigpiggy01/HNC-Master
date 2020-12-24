@@ -197,8 +197,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         if (!GetCoinAge(tx, inputs, nCoinAge))
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "unable to get coin age for coinstake");
         CAmount nStakeReward = tx.GetValueOut() - nValueIn;
-        CAmount nCoinstakeCost = (GetMinFee(tx) < PERKB_TX_FEE) ? 0 : (GetMinFee(tx) - PERKB_TX_FEE);
-        if (nMoneySupply && nStakeReward > GetProofOfStakeReward(nCoinAge, tx.nTime, nMoneySupply) - nCoinstakeCost)
+        if (nStakeReward > GetProofOfStakeReward(::ChainActive().Tip()->pprev, tx.nTime, nMoneySupply))
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-coinstake-too-large");
     }
     else
@@ -213,9 +212,6 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         if (!MoneyRange(txfee_aux)) {
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-outofrange");
         }
-        // peercoin: enforce transaction fees for every block
-        if (txfee_aux < GetMinFee(tx))
-            return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-not-enough");
         txfee = txfee_aux;
     }
     return true;
@@ -229,11 +225,7 @@ CAmount GetMinFee(const CTransaction& tx)
 
 CAmount GetMinFee(size_t nBytes, uint32_t nTime)
 {
-    CAmount nMinFee;
-    if (IsProtocolV07(nTime)) // RFC-0007
-        nMinFee = (nBytes < 100) ? MIN_TX_FEE : (CAmount)(nBytes * (PERKB_TX_FEE / 1000));
-    else
-        nMinFee = (1 + (CAmount)nBytes / 1000) * PERKB_TX_FEE;
+    CAmount nMinFee = (1 + (CAmount)nBytes / 1000) * PERKB_TX_FEE;
 
     if (!MoneyRange(nMinFee))
         nMinFee = MAX_MONEY;

@@ -21,8 +21,7 @@
  * Maximum amount of time that a block timestamp is allowed to exceed the
  * current network-adjusted time before the block will be accepted.
  */
-static constexpr int64_t MAX_FUTURE_BLOCK_TIME_PREV9 = 2 * 60 * 60;
-static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 15 * 60;
+static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60;
 
 /**
  * Timestamp window used as a grace period by code that compares external
@@ -30,7 +29,7 @@ static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 15 * 60;
  * to block timestamps. This should be set at least as high as
  * MAX_FUTURE_BLOCK_TIME.
  */
-static constexpr int64_t TIMESTAMP_WINDOW = MAX_FUTURE_BLOCK_TIME_PREV9;
+static constexpr int64_t TIMESTAMP_WINDOW = MAX_FUTURE_BLOCK_TIME;
 
 /**
  * Maximum gap between node time and block time used
@@ -145,6 +144,7 @@ public:
 
     //! pointer to the index of the predecessor of this block
     CBlockIndex* pprev{nullptr};
+    CBlockIndex* pnext{nullptr};
 
     //! pointer to the index of some further predecessor of this block
     CBlockIndex* pskip{nullptr};
@@ -203,6 +203,7 @@ public:
         BLOCK_STAKE_MODIFIER = (1 << 2), // regenerated stake modifier
     };
     uint64_t nStakeModifier{0}; // hash modifier for proof-of-stake
+    uint256 bnStakeModifierV2{};
     unsigned int nStakeModifierChecksum{0}; // checksum of index; in-memeory only
     COutPoint prevoutStake{};
     unsigned int nStakeTime{0};
@@ -416,13 +417,16 @@ class CDiskBlockIndex : public CBlockIndex
 {
 public:
     uint256 hashPrev;
+    uint256 hashNext;
 
     CDiskBlockIndex() {
         hashPrev = uint256();
+        hashNext = uint256();
     }
 
     explicit CDiskBlockIndex(const CBlockIndex* pindex) : CBlockIndex(*pindex) {
         hashPrev = (pprev ? pprev->GetBlockHash() : uint256());
+        hashNext = (pnext ? pnext->GetBlockHash() : uint256());
     }
 
     SERIALIZE_METHODS(CDiskBlockIndex, obj)
@@ -441,6 +445,8 @@ public:
         READWRITE(obj.nMoneySupply);
         READWRITE(obj.nFlags);
         READWRITE(obj.nStakeModifier);
+        READWRITE(obj.bnStakeModifierV2);
+
         if (obj.nFlags & BLOCK_PROOF_OF_STAKE)
         {
             READWRITE(obj.prevoutStake);

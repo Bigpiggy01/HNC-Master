@@ -11,33 +11,20 @@ class BlockValidationState;
 class CBlockHeader;
 class CBlock;
 
+// To decrease granularity of timestamp
+// Supposed to be 2^n-1
+static const int STAKE_TIMESTAMP_MASK = 15;
+
+bool CheckStakeKernelHash(unsigned int nBits, CBlockIndex* pindexPrev, const CBlockHeader& blockFrom, unsigned int nTxPrevOffset, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake, bool fPrintProofOfStake = false);
 
 // MODIFIER_INTERVAL_RATIO:
 // ratio of group interval length between the last group and the first group
 static const int MODIFIER_INTERVAL_RATIO = 3;
 
-// Protocol switch time of v0.3 kernel protocol
-extern unsigned int nProtocolV03SwitchTime;
-extern unsigned int nProtocolV03TestSwitchTime;
-
-// Whether a given coinstake is subject to new v0.3 protocol
-bool IsProtocolV03(unsigned int nTimeCoinStake);
-// Whether a given block is subject to new v0.4 protocol
-bool IsProtocolV04(unsigned int nTimeBlock);
-// Whether a given transaction is subject to new v0.5 protocol
-bool IsProtocolV05(unsigned int nTimeTx);
-// Whether a given block is subject to new v0.6 protocol
-// Test against previous block index! (always available)
-bool IsProtocolV06(const CBlockIndex *pindexPrev);
-// Whether a given transaction is subject to new v0.7 protocol
-bool IsProtocolV07(unsigned int nTimeTx);
-// Whether a given block is subject to new BIPs from bitcoin 0.16.x
-bool IsBTC16BIPsEnabled(uint32_t nTimeTx);
-// Whether a given timestamp is subject to new v0.9 protocol
-bool IsProtocolV09(unsigned int nTimeTx);
-
 // Compute the hash modifier for proof-of-stake
-bool ComputeNextStakeModifier(const CBlockIndex* pindexCurrent, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier);
+bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier);
+
+uint256 ComputeStakeModifierV2(const CBlockIndex* pindexPrev, const uint256& kernel);
 
 // Check whether stake kernel meets hash target
 // Sets hashProofOfStake on success return

@@ -81,6 +81,12 @@ public:
         return sizeof(data);
     }
 
+    uint64_t GetLow64() const
+    {
+        assert(WIDTH >= 2);
+        return data[0] | (uint64_t)data[1] << 32;
+    }
+
     uint64_t GetUint64(int pos) const
     {
         const uint8_t* ptr = data + pos * 8;
