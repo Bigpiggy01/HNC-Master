@@ -15,20 +15,12 @@
 #include <validation.h>
 
 static const int64_t nTargetTimespan = 120 * 60;
-CBigNum bnProofOfStakeLimit(uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
-CBigNum bnProofOfStakeLimitV2(uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff"));
-
-static CBigNum GetProofOfStakeLimit(int nHeight)
-{
-    if (IsProtocolV2(nHeight))
-        return bnProofOfStakeLimitV2;
-    else
-        return bnProofOfStakeLimit;
-}
+arith_uint256 bnProofOfStakeLimit("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+arith_uint256 bnProofOfStakeLimitV2("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake, const Consensus::Params& params)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? GetProofOfStakeLimit(pindexLast->nHeight) : bnProofOfStakeLimit;
+    arith_uint256 bnTargetLimit = fProofOfStake ? bnProofOfStakeLimitV2 : bnProofOfStakeLimit;
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
@@ -53,9 +45,9 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 
     // ppcoin: target change every block
     // ppcoin: retarget with exponential moving toward target spacing
-    CBigNum bnNew;
+    arith_uint256 bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
-    int64_t nInterval = nTargetTimespan / nTargetSpacing;
+    int64_t nInterval = 120;
     bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
     bnNew /= ((nInterval + 1) * nTargetSpacing);
 

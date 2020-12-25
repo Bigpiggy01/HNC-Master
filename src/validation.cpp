@@ -2898,7 +2898,7 @@ CBlockIndex* BlockManager::AddToBlockIndex(const CBlockHeader& block)
         pindexNew->BuildSkip();
     }
     pindexNew->nTimeMax = (pindexNew->pprev ? std::max(pindexNew->pprev->nTimeMax, pindexNew->nTime) : pindexNew->nTime);
-    if (block.nFlags & CBlockIndex::BLOCK_PROOF_OF_STAKE)
+    if (!block.nNonce)
         pindexNew->SetProofOfStake();
     pindexNew->nChainTrust = (pindexNew->pprev ? pindexNew->pprev->nChainTrust : 0) + GetBlockTrust(*pindexNew);
     pindexNew->RaiseValidity(BLOCK_VALID_TREE);
@@ -3240,6 +3240,12 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
 static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& state, const CBlockIndex* pindexPrev)
 {
     const int nHeight = pindexPrev == nullptr ? 0 : pindexPrev->nHeight + 1;
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+
+    auto calcTarget = GetNextTargetRequired(pindexPrev, block.IsProofOfStake(), consensusParams);
+    LogPrintf("found %08x expecting %08x\n", block.nBits, calcTarget);
+    if (block.nBits != calcTarget)
+        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-diffbits", "incorrect proof of work/stake");
 
     // Start enforcing BIP113 (Median Time Past)
     int nLockTimeFlags = 0;
@@ -3457,19 +3463,6 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     if (fCheckPoS && pindex->pprev && !pindex->pprev->IsValid(BLOCK_VALID_TRANSACTIONS)) {
         return error("%s: this block does not connect to any valid known block", __func__);
     }
-
-    // Check proof of work or proof-of-stake
-    const Consensus::Params& consensusParams = Params().GetConsensus();
-
-//  NOTE:
-//  this portion of the code is commented out; as the original source (https://github.com/helleniccoin/HNC/blob/master/helleniccoin-source.tar.gz)
-//  does not contain the correct spacing values. this additionally prevents the old source from syncing from scratch.
-//  once the correct values have been found, this will be amended.
-//
-//  if (block.nBits != GetNextTargetRequired(pindex->pprev, block.IsProofOfStake(), consensusParams)) {
-//      LogPrintf("found %08x wanted %08x\n", block.nBits, GetNextTargetRequired(pindex->pprev, pblock->IsProofOfStake(), consensusParams));
-//      return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-diffbits", "incorrect proof of work/stake");
-//  }
 
     // Try to process all requested blocks that we don't have, but only
     // process an unrequested block if it's new and has enough work to
