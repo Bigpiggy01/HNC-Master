@@ -5,7 +5,7 @@ Helleniccoin staging tree 0.20
 [![Build Status](https://travis-ci.org/helleniccoin/helleniccoin.svg?branch=master)](https://travis-ci.org/helleniccoin/helleniccoin)
 
 ### What is Helleniccoin?
-[Helleniccoin](https://helleniccoin.net) (abbreviated HNC), is the first [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) design introducing [proof-of-stake consensus](https://helleniccoin.net/resources#whitepaper) as a security model, with a combined [proof-of-stake](https://helleniccoin.net/resources#whitepaper)/[proof-of-work](https://en.wikipedia.org/wiki/Proof-of-work_system) minting system. Helleniccoin is based on [Bitcoin](https://bitcoin.org), while introducing many important innovations to cryptocurrency field including new security model, energy efficiency, better minting model and more adaptive response to rapid change in network computation power.
+[Helleniccoin](https://helleniccoin.net) (abbreviated HNC), is the first Hellenic [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) design introducing [proof-of-stake consensus](https://helleniccoin.net/resources#whitepaper) as a security model, taking over from [proof-of-work](https://en.wikipedia.org/wiki/Proof-of-work_system) minting system. Helleniccoin is based on [Bitcoin](https://bitcoin.org), while introducing many important innovations to cryptocurrency field including new security model, energy efficiency, better minting model and more adaptive response to rapid change in network computation power.
 
 ### Helleniccoin Resources
 * Client and Source:
