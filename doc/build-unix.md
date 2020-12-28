@@ -189,7 +189,7 @@ If you need to build Boost yourself:
 
 Security
 --------
-To help make your peercoin installation more secure by making certain attacks impossible to
+To help make your helleniccoin installation more secure by making certain attacks impossible to
 exploit even if a vulnerability is found, binaries are hardened by default.
 This can be disabled with:
 
@@ -211,7 +211,7 @@ Hardening enables the following features:
 
     To test that you have built PIE executable, install scanelf, part of paxutils, and use:
 
-    	scanelf -e ./peercoin
+    	scanelf -e ./helleniccoin
 
     The output should contain:
 
@@ -225,7 +225,7 @@ Hardening enables the following features:
     executable without the non-executable stack protection.
 
     To verify that the stack is non-executable after compiling use:
-    `scanelf -e ./peercoin`
+    `scanelf -e ./helleniccoin`
 
     The output should contain:
 	STK/REL/PTL
@@ -263,8 +263,8 @@ Setup and Build Example: Arch Linux
 This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
 
     pacman -S git base-devel boost libevent python
-    git clone https://github.com/peercoin/peercoin.git
-    cd peercoin/
+    git clone https://github.com/HellenicCoin-HNC/wallet
+    cd wallet-hellenic/
     ./autogen.sh
     ./configure --disable-wallet --without-gui --without-miniupnpc
     make check
