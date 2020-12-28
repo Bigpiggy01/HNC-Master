@@ -58,7 +58,7 @@ Build HellenicCoin
     You can disable the GUI build by passing `--without-gui` to configure.
     ```shell
     ./autogen.sh
-    ./configure
+    ./configure --disable-tests --disable-bench
     make
     ```
 
