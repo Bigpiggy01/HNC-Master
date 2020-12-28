@@ -1,12 +1,12 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build Peercoin in Unix.
+Some notes on how to build Helleniccoin in Unix.
 
 (For BSD specific instructions, see `build-*bsd.md` in this directory.)
 
 Note
 ---------------------
-Always use absolute paths to configure and compile Peercoin and the dependencies,
+Always use absolute paths to configure and compile Helleniccoin and the dependencies,
 For example, when specifying the path of the dependency:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
@@ -24,7 +24,7 @@ make
 make install # optional
 ```
 
-This will build peercoin-qt as well, if the dependencies are met.
+This will build helleniccoin-qt as well, if the dependencies are met.
 
 Dependencies
 ---------------------
@@ -53,7 +53,7 @@ Memory Requirements
 --------------------
 
 C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling Peercoin. On systems with less, gcc can be
+memory available when compiling Helleniccoin. On systems with less, gcc can be
 tuned to conserve memory with additional CXXFLAGS:
 
 
@@ -83,7 +83,7 @@ Now, you can either build from self-compiled [depends](/depends/README.md) or in
     sudo apt-get install libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev
 
 BerkeleyDB is required for the wallet functionality.
-Historically Peercoin was first deployed with now deprecated BerkeleyDB-4.8, which has resulted in the need to upkeep the compatibility with those ancient deployments to this day. BerkeleyDB-4.8 is not compatible with more modern BerkeleyDB-5.1 and BerkeleyDB-5.3. Peercoin has inherited this in the first versions and this is why Peercoin is still officially shipped out with BerkeleyDB-4.8.
+Historically Helleniccoin was first deployed with now deprecated BerkeleyDB-4.8, which has resulted in the need to upkeep the compatibility with those ancient deployments to this day. BerkeleyDB-4.8 is not compatible with more modern BerkeleyDB-5.1 and BerkeleyDB-5.3. Helleniccoin has inherited this in the first versions and this is why Helleniccoin is still officially shipped out with BerkeleyDB-4.8.
 However if you running a new wallet on a new installation there is absolutely no need to run old and deprecated BerkeleyDB-4.8. Just use the one avaliable in the repository of your distribution.
 
 Ubuntu and Debian have their own `libdb-dev` and `libdb++-dev` packages, but these will install
@@ -93,7 +93,7 @@ pass `--with-incompatible-bdb` to configure.
 
 Otherwise, you can build from self-compiled `depends` (see above).
 
-To build Peercoin without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
+To build Helleniccoin without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
 
 
 Optional (see `--with-miniupnpc` and `--enable-upnp-default`):
@@ -106,7 +106,7 @@ ZMQ dependencies (provides ZMQ API):
 
 GUI dependencies:
 
-If you want to build Peercoin-Qt, make sure that the required packages for Qt development
+If you want to build Helleniccoin-Qt, make sure that the required packages for Qt development
 are installed. Qt 5 is necessary to build the GUI.
 To build without GUI pass `--without-gui`.
 
@@ -118,7 +118,7 @@ libqrencode (optional) can be installed with:
 
     sudo apt-get install libqrencode-dev
 
-Once these are installed, they will be found by configure and a peercoin-qt executable will be
+Once these are installed, they will be found by configure and a helleniccoin-qt executable will be
 built by default.
 
 
@@ -148,7 +148,7 @@ libqrencode (optional) can be installed with:
 
 Notes
 -----
-The release is built with GCC and then "strip peercoind" to strip the debug
+The release is built with GCC and then "strip helleniccoind" to strip the debug
 symbols, which reduces the executable size by about 90%.
 
 
