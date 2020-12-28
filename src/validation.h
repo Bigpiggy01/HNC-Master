@@ -779,7 +779,7 @@ bool DumpMempool(const CTxMemPool& pool);
 bool LoadMempool(CTxMemPool& pool);
 
 // peercoin:
-CAmount GetProofOfWorkReward(int nHeight, int64_t nFees);
+CAmount GetProofOfWorkReward(int nHeight, int64_t nFees = 0);
 CAmount GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees);
 bool GetCoinAge(const CTransaction& tx, const CCoinsViewCache &view, uint64_t& nCoinAge, bool isTrueCoinAge = true); // peercoin: get transaction coin age
 bool SignBlock(CBlock& block, const CWallet& keystore);
