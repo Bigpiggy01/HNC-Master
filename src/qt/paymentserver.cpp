@@ -47,7 +47,7 @@ const QString BITCOIN_IPC_PREFIX("helleniccoin:");
 //
 static QString ipcServerName()
 {
-    QString name("PeercoinQt");
+    QString name("HelleniccoinQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path

@@ -167,7 +167,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Peercoin</source>
+        <source>Helleniccoin</source>
         <translation>Пиркойн</translation>
     </message>
     <message>

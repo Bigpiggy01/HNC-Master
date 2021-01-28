@@ -57,7 +57,7 @@ std::string GetWarnings(bool verbose)
         warnings_verbose = _("This is a pre-release test build - use at your own risk - do not use for mining or merchant applications").translated;
     }
 
-    // peercoin: wallet lock warning for minting
+    // helleniccoin: wallet lock warning for minting
     if (strMintWarning != "")
     {
         nPriority = 0;

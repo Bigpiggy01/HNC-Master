@@ -113,7 +113,7 @@ static const int64_t DEFAULT_MAX_TIP_AGE = 24 * 60 * 60;
 static const int64_t MAX_FEE_ESTIMATION_TIP_AGE = 3 * 60 * 60;
 
 static const bool DEFAULT_CHECKPOINTS_ENABLED = true;
-static const bool DEFAULT_TXINDEX = true;  // peercoin: txindex is required for PoS calculations (might change in the future)
+static const bool DEFAULT_TXINDEX = true;  // helleniccoin: txindex is required for PoS calculations (might change in the future)
 static const char* const DEFAULT_BLOCKFILTERINDEX = "0";
 static const unsigned int DEFAULT_BANSCORE_THRESHOLD = 100;
 /** Default for -persistmempool */
@@ -778,10 +778,10 @@ bool DumpMempool(const CTxMemPool& pool);
 /** Load the mempool from disk. */
 bool LoadMempool(CTxMemPool& pool);
 
-// peercoin:
+// helleniccoin:
 CAmount GetProofOfWorkReward(int nHeight, int64_t nFees = 0);
 CAmount GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees);
-bool GetCoinAge(const CTransaction& tx, const CCoinsViewCache &view, uint64_t& nCoinAge, bool isTrueCoinAge = true); // peercoin: get transaction coin age
+bool GetCoinAge(const CTransaction& tx, const CCoinsViewCache &view, uint64_t& nCoinAge, bool isTrueCoinAge = true); // helleniccoin: get transaction coin age
 bool SignBlock(CBlock& block, const CWallet& keystore);
 bool CheckBlockSignature(const CBlock& block);
 

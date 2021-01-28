@@ -45,7 +45,7 @@ static const int CLIENT_VERSION =
                          +     100 * CLIENT_VERSION_REVISION
                          +       1 * CLIENT_VERSION_BUILD;
 
-// note: peercoin version is used for display purpose AND to accept alerts
+// note: helleniccoin version is used for display purpose AND to accept alerts
 static const int PEERCOIN_VERSION =
                            1000000 * PEERCOIN_VERSION_MAJOR
                          +   10000 * PEERCOIN_VERSION_MINOR

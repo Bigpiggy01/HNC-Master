@@ -155,8 +155,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Peercoin</source>
-        <translation>Peercoin</translation>
+        <source>Helleniccoin</source>
+        <translation>Helleniccoin</translation>
     </message>
     </context>
 <context>
@@ -187,8 +187,8 @@
         <translation>Marii</translation>
     </message>
     <message>
-        <source>Enter a Peercoin address (e.g. %1)</source>
-        <translation>Nyora kero ye Peercoin (sekuti %1)</translation>
+        <source>Enter a Helleniccoin address (e.g. %1)</source>
+        <translation>Nyora kero ye Helleniccoin (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>

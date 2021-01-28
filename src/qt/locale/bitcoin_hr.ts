@@ -66,8 +66,8 @@
         <translation>Adrese primatelja</translation>
     </message>
     <message>
-        <source>These are your Peercoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše Peercoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
+        <source>These are your Helleniccoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ovo su vaše Helleniccoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
@@ -362,8 +362,8 @@
         <translation>Proxy je &lt;b&gt;uključen&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Peercoin address</source>
-        <translation>Pošaljite novac na Peercoin adresu</translation>
+        <source>Send coins to a Helleniccoin address</source>
+        <translation>Pošaljite novac na Helleniccoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -398,12 +398,12 @@
         <translation>Šifrirajte privatne ključeve u novčaniku</translation>
     </message>
     <message>
-        <source>Sign messages with your Peercoin addresses to prove you own them</source>
-        <translation>Poruku potpišemo s Peercoin adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
+        <source>Sign messages with your Helleniccoin addresses to prove you own them</source>
+        <translation>Poruku potpišemo s Helleniccoin adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Peercoin addresses</source>
-        <translation>Provjerite poruku da je potpisana s navedenom Peercoin adresom</translation>
+        <source>Verify messages to ensure they were signed with specified Helleniccoin addresses</source>
+        <translation>Provjerite poruku da je potpisana s navedenom Helleniccoin adresom</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -422,8 +422,8 @@
         <translation>Traka kartica</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and peercoin: URIs)</source>
-        <translation>Zatražite uplatu (stvara QR kod i peercoin: URI adresu)</translation>
+        <source>Request payments (generates QR codes and helleniccoin: URIs)</source>
+        <translation>Zatražite uplatu (stvara QR kod i helleniccoin: URI adresu)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -438,8 +438,8 @@
         <translation>Opcije &amp;naredbene linije</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Peercoin network</source>
-        <translation><numerusform>%n aktivna veza na Peercoin mrežu</numerusform><numerusform>%n aktivnih veza na Peercoin mrežu</numerusform><numerusform>%n aktivnih veza na Peercoin mrežu</numerusform></translation>
+        <source>%n active connection(s) to Helleniccoin network</source>
+        <translation><numerusform>%n aktivna veza na Helleniccoin mrežu</numerusform><numerusform>%n aktivnih veza na Helleniccoin mrežu</numerusform><numerusform>%n aktivnih veza na Helleniccoin mrežu</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -861,8 +861,8 @@
         <translation>Uredi adresu za slanje</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Peercoin address.</source>
-        <translation>Upisana adresa "%1" nije valjana Peercoin adresa.</translation>
+        <source>The entered address "%1" is not a valid Helleniccoin address.</source>
+        <translation>Upisana adresa "%1" nije valjana Helleniccoin adresa.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -1200,8 +1200,8 @@
         <translation>&amp;Trošenje nepotvrđenih vraćenih iznosa</translation>
     </message>
     <message>
-        <source>Automatically open the Peercoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvori port Peercoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
+        <source>Automatically open the Helleniccoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatski otvori port Helleniccoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1289,7 +1289,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izaberite željeni najmanji dio peercoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
+        <translation>Izaberite željeni najmanji dio helleniccoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1363,8 +1363,8 @@
         <translation>Oblik</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Peercoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s Peercoin mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Helleniccoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s Helleniccoin mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
     </message>
     <message>
         <source>Watch-only:</source>

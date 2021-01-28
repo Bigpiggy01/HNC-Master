@@ -552,7 +552,7 @@ void SetupServerArgs()
     hidden_args.emplace_back("-daemon");
 #endif
 
-    // peercoin parameters
+    // helleniccoin parameters
     gArgs.AddArg("-printstakemodifier", "Print stakemodifier selection parameters if debug is enabled", ArgsManager::ALLOW_BOOL, OptionsCategory::DEBUG_TEST);
     gArgs.AddArg("-printcoinstake", "Print coinstake if debug is enabled", ArgsManager::ALLOW_BOOL, OptionsCategory::DEBUG_TEST);
     gArgs.AddArg("-printcoinage", "Print coinage if debug is enabled", ArgsManager::ALLOW_BOOL, OptionsCategory::DEBUG_TEST);
@@ -689,7 +689,7 @@ static void ThreadImport(std::vector<fs::path> vImportFiles)
 }
 
 /** Sanity checks
- *  Ensure that Peercoin is running in a usable environment with all
+ *  Ensure that Helleniccoin is running in a usable environment with all
  *  necessary library support.
  */
 static bool InitSanityCheck()
@@ -1032,7 +1032,7 @@ bool AppInitParameterInteraction()
 
 static bool LockDataDirectory(bool probeOnly)
 {
-    // Make sure only a single Peercoin process is using the data directory.
+    // Make sure only a single Helleniccoin process is using the data directory.
     fs::path datadir = GetDataDir();
     if (!DirIsWritable(datadir)) {
         return InitError(strprintf(_("Cannot write to data directory '%s'; check permissions.").translated, datadir.string()));
@@ -1054,12 +1054,12 @@ bool AppInitSanityChecks()
     ECC_Start();
     globalVerifyHandle.reset(new ECCVerifyHandle());
 
-    // peercoin: init hash seed
-    peercoinRandseed = GetRand(1 << 30);
+    // helleniccoin: init hash seed
+    helleniccoinRandseed = GetRand(1 << 30);
 
 #ifdef ENABLE_CHECKPOINTS
-    // peercoin: moved here because ECC need to be initialized to execute this
-    if (gArgs.IsArgSet("-checkpointkey")) // peercoin: checkpoint master priv key
+    // helleniccoin: moved here because ECC need to be initialized to execute this
+    if (gArgs.IsArgSet("-checkpointkey")) // helleniccoin: checkpoint master priv key
     {
         if (!SetCheckpointPrivKey(gArgs.GetArg("-checkpointkey", "")))
             return InitError("Unable to sign checkpoint, wrong checkpointkey?");
@@ -1133,9 +1133,9 @@ bool AppInitMain(NodeContext& node)
     // Warn about relative -datadir path.
     if (gArgs.IsArgSet("-datadir") && !fs::path(gArgs.GetArg("-datadir", "")).is_absolute()) {
         LogPrintf("Warning: relative datadir option '%s' specified, which will be interpreted relative to the " /* Continued */
-                  "current working directory '%s'. This is fragile, because if peercoin is started in the future "
+                  "current working directory '%s'. This is fragile, because if helleniccoin is started in the future "
                   "from a different location, it will be unable to locate the current data files. There could "
-                  "also be data loss if peercoin is started while in a temporary directory.\n",
+                  "also be data loss if helleniccoin is started while in a temporary directory.\n",
             gArgs.GetArg("-datadir", ""), fs::current_path().string());
     }
 
@@ -1445,11 +1445,11 @@ bool AppInitMain(NodeContext& node)
                 }
 
 #ifdef ENABLE_CHECKPOINTS
-                // peercoin: initialize synchronized checkpoint
+                // helleniccoin: initialize synchronized checkpoint
                 if (!fReindex && !WriteSyncCheckpoint(chainparams.GenesisBlock().GetHash()))
                     return error("LoadBlockIndex() : failed to init sync checkpoint");
 
-                // peercoin: if checkpoint master key changed must reset sync-checkpoint
+                // helleniccoin: if checkpoint master key changed must reset sync-checkpoint
                 if (!CheckCheckpointPubKey())
                     return error("failed to reset checkpoint master pubkey");
 #endif

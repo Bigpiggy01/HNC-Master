@@ -34,7 +34,7 @@
 //#include <checkpointsync.h>
 
 #if defined(NDEBUG)
-# error "Peercoin cannot be compiled without assertions."
+# error "Helleniccoin cannot be compiled without assertions."
 #endif
 
 /** Expiration time for orphan transactions in seconds */
@@ -167,7 +167,7 @@ namespace {
     };
     std::map<uint256, std::pair<NodeId, std::list<QueuedBlock>::iterator> > mapBlocksInFlight GUARDED_BY(cs_main);
 
-    /** peercoin: blocks that are waiting to be processed, the key points to previous CBlockIndex entry */
+    /** helleniccoin: blocks that are waiting to be processed, the key points to previous CBlockIndex entry */
     struct WaitElement {
         std::shared_ptr<CBlock> pblock;
             int64_t time;
@@ -1559,7 +1559,7 @@ void static ProcessGetBlockData(CNode* pfrom, const CChainParams& chainparams, c
             // Bypass PushInventory, this must send even if redundant,
             // and we want it right after the last block so they don't
             // wait for other stuff first.
-            // peercoin: send latest proof-of-work block to allow the
+            // helleniccoin: send latest proof-of-work block to allow the
             // download node to accept as orphan (proof-of-stake
             // block might be rejected by stake connection check)
             std::vector<CInv> vInv;
@@ -2088,7 +2088,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         }
 
 #ifdef ENABLE_CHECKPOINTS
-        // peercoin: relay sync-checkpoint
+        // helleniccoin: relay sync-checkpoint
         {
             LOCK(cs_main);
             if (!checkpointMessage.IsNull())
@@ -2096,7 +2096,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         }
 #endif
 
-        // peercoin: relay alerts
+        // helleniccoin: relay alerts
         {
             LOCK(cs_mapAlerts);
             for (auto& item : mapAlerts)
@@ -2129,7 +2129,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         }
 
 #ifdef ENABLE_CHECKPOINTS
-        // peercoin: ask for pending sync-checkpoint if any
+        // helleniccoin: ask for pending sync-checkpoint if any
         if (!::ChainstateActive().IsInitialBlockDownload())
             AskForPendingSyncCheckpoint(pfrom);
 #endif
@@ -2144,7 +2144,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         return false;
     }
 
-    // peercoin: set/unset network serialization mode for new clients
+    // helleniccoin: set/unset network serialization mode for new clients
     if (pfrom->nVersion <= OLD_VERSION)
         vRecv.SetType(vRecv.GetType() & ~SER_POSMARKER);
     else

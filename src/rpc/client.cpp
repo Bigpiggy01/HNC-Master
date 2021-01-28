@@ -165,7 +165,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "createwallet", 4, "avoid_reuse"},
     { "getnodeaddresses", 0, "count"},
     { "stop", 0, "wait" },
-    // peercoin:
+    // helleniccoin:
     { "sendalert", 2, "minver"},
     { "sendalert", 3, "maxver"},
     { "sendalert", 4, "priority"},

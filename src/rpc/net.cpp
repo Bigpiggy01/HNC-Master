@@ -763,7 +763,7 @@ static UniValue getnodeaddresses(const JSONRPCRequest& request)
     return ret;
 }
 
-// peercoin: send alert.  
+// helleniccoin: send alert.  
 UniValue sendalert(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 6)
@@ -923,7 +923,7 @@ static const CRPCCommand commands[] =
     { "network",            "clearbanned",            &clearbanned,            {} },
     { "network",            "setnetworkactive",       &setnetworkactive,       {"state"} },
     { "network",            "getnodeaddresses",       &getnodeaddresses,       {"count"} },
-    // peercoin:
+    // helleniccoin:
 #ifdef ENABLE_CHECKPOINTS
     { "network",            "getcheckpoint",          &getcheckpoint,          {} },
     { "network",            "sendcheckpoint",         &sendcheckpoint,         {} },

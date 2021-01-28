@@ -249,7 +249,7 @@ WalletCreationStatus CreateWallet(interfaces::Chain& chain, const SecureString& 
 
 const uint256 CWalletTx::ABANDON_HASH(UINT256_ONE());
 
-// peercoin: optional setting to unlock wallet for block minting only;
+// helleniccoin: optional setting to unlock wallet for block minting only;
 //         serves to disable the trivial sendmoney when OS account compromised
 bool fWalletUnlockMintOnly = false;
 
@@ -1407,7 +1407,7 @@ int64_t CWalletTx::GetTxTime() const
 {
 //    int64_t n = nTimeSmart;
 //    return n ? n : nTimeReceived;
-    // peercoin: we still have the timestamp, so use it to avoid confusion
+    // helleniccoin: we still have the timestamp, so use it to avoid confusion
     return tx->nTime;
 }
 
@@ -2144,7 +2144,7 @@ void CWallet::AvailableCoins(interfaces::Chain::Lock& locked_chain, std::vector<
         }
 
         if (nSpendTime > 0 && wtx.tx->nTime > nSpendTime)
-            continue;  // peercoin: timestamp must not exceed spend time
+            continue;  // helleniccoin: timestamp must not exceed spend time
 
         if (wtx.IsImmatureCoinBase())
             continue;
@@ -2935,7 +2935,7 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
 //                    nFeeRet += nMoveToFee;
 //                }
 
-                // peercoin: sub-cent change is moved to fee
+                // helleniccoin: sub-cent change is moved to fee
                 if (nChange > 0 && nChange < MIN_TXOUT_AMOUNT)
                 {
                     nFeeRet += nChange;
@@ -4315,7 +4315,7 @@ void CWallet::ConnectScriptPubKeyManNotifiers()
     }
 }
 
-// peercoin: create coin stake transaction
+// helleniccoin: create coin stake transaction
 typedef std::vector<unsigned char> valtype;
 bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew)
 {

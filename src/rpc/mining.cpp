@@ -54,7 +54,7 @@ static UniValue GetNetworkHashPS(int lookup, int height) {
     if (pb == nullptr || !pb->nHeight)
         return 0;
 
-    //ppcTODO - redo this to fit peercoin
+    //ppcTODO - redo this to fit helleniccoin
     // If lookup is -1, then use blocks since last difficulty change.
 //    if (lookup <= 0)
 //        lookup = pb->nHeight % Params().GetConsensus().DifficultyAdjustmentInterval() + 1;
@@ -105,7 +105,7 @@ static UniValue getnetworkhashps(const JSONRPCRequest& request)
     return GetNetworkHashPS(!request.params[0].isNull() ? request.params[0].get_int() : 120, !request.params[1].isNull() ? request.params[1].get_int() : -1);
 }
 
-// peercoin: get network Gh/s estimate
+// helleniccoin: get network Gh/s estimate
 UniValue getnetworkghps(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 0)
@@ -236,7 +236,7 @@ static UniValue generatetoaddress(const JSONRPCRequest& request)
                 "\nMine blocks immediately to a specified address (before the RPC call returns)\n",
                 {
                     {"nblocks", RPCArg::Type::NUM, RPCArg::Optional::NO, "How many blocks are generated immediately."},
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The address to send the newly generated peercoin to."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The address to send the newly generated helleniccoin to."},
                     {"maxtries", RPCArg::Type::NUM, /* default */ "1000000", "How many iterations to try."},
                 },
                 RPCResult{
@@ -247,7 +247,7 @@ static UniValue generatetoaddress(const JSONRPCRequest& request)
                 RPCExamples{
             "\nGenerate 11 blocks to myaddress\n"
             + HelpExampleCli("generatetoaddress", "11 \"myaddress\"")
-            + "If you are running the Peercoin wallet, you can get a new address to send the newly generated peercoin to with:\n"
+            + "If you are running the Helleniccoin wallet, you can get a new address to send the newly generated helleniccoin to with:\n"
             + HelpExampleCli("getnewaddress", "")
                 },
             }.Check(request);
@@ -748,14 +748,14 @@ static UniValue submitblock(const JSONRPCRequest& request)
         }
     }
 
-    // peercoin: check block before attempting to sign it
+    // helleniccoin: check block before attempting to sign it
     BlockValidationState state;
     if (!CheckBlock(block, state, Params().GetConsensus(), true,  true, false)) {
         LogPrintf("SubmitBlock: %s\n", state.ToString());
         throw JSONRPCError(-100, "Block failed CheckBlock() function.");
         }
 
-    // peercoin: sign block
+    // helleniccoin: sign block
     if (!SignBlock(block, *pwallet))
         throw JSONRPCError(-100, "Unable to sign block, wallet locked?");
 

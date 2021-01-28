@@ -326,8 +326,8 @@
         <translation>Tarpinis serveris yra &lt;b&gt;įgalintas&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Peercoin address</source>
-        <translation>Siųsti monetas Peercoin adresui</translation>
+        <source>Send coins to a Helleniccoin address</source>
+        <translation>Siųsti monetas Helleniccoin adresui</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -2406,7 +2406,7 @@ Pastaba: Kadangi mokestis apskaičiuojamas pagal baitą, mokestis už „100 sat
     </message>
     <message>
         <source>The Bitcoin address the message was signed with</source>
-        <translation>Peercoin adresas, kuriuo buvo pasirašytas pranešimas</translation>
+        <translation>Helleniccoin adresas, kuriuo buvo pasirašytas pranešimas</translation>
     </message>
     <message>
     </message>
